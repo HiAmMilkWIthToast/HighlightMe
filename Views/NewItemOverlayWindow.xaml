@@ -1,0 +1,77 @@
+<Window x:Class="HighlightMe.Views.NewItemOverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NewItem"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="True"
+        ShowInTaskbar="False"
+        IsHitTestVisible="False"
+        ResizeMode="NoResize">
+    
+    <Grid>
+        <!-- Red glow effect for new items -->
+        <Border x:Name="GlowBorder"
+                CornerRadius="8"
+                BorderThickness="4"
+                BorderBrush="#FF3333"
+                Background="Transparent"
+                Margin="10">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="25" 
+                                  ShadowDepth="0" 
+                                  Color="#FF3333" 
+                                  Opacity="0.95"/>
+            </Border.Effect>
+        </Border>
+        
+        <!-- Inner pulse animation border -->
+        <Border x:Name="PulseBorder"
+                CornerRadius="8"
+                BorderThickness="2"
+                BorderBrush="#FFFFFF"
+                Background="Transparent"
+                Margin="12"
+                Opacity="0.8">
+            <Border.Effect>
+                <BlurEffect Radius="2"/>
+            </Border.Effect>
+        </Border>
+        
+        <!-- Animated red highlight -->
+        <Border x:Name="AnimatedBorder"
+                CornerRadius="8"
+                Background="#30FF3333"
+                Margin="10">
+            <Border.Triggers>
+                <EventTrigger RoutedEvent="Border.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                            <DoubleAnimation Storyboard.TargetName="AnimatedBorder"
+                                             Storyboard.TargetProperty="Opacity"
+                                             From="0.3" To="0.8"
+                                             Duration="0:0:0.5"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Border.Triggers>
+        </Border>
+        
+        <!-- "NEW" label -->
+        <Border Background="#FF3333" 
+                CornerRadius="4" 
+                Padding="6,2" 
+                HorizontalAlignment="Right" 
+                VerticalAlignment="Top"
+                Margin="0,-5,-5,0">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.5"/>
+            </Border.Effect>
+            <TextBlock Text="NEW" 
+                       FontSize="10" 
+                       FontWeight="Bold" 
+                       Foreground="White"/>
+        </Border>
+    </Grid>
+</Window>
