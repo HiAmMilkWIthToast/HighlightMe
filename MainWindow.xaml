@@ -716,20 +716,50 @@
                                 <EventTrigger RoutedEvent="Border.MouseEnter">
                                     <BeginStoryboard>
                                         <Storyboard>
+                                            <!-- Card Scale Animation -->
                                             <DoubleAnimation Storyboard.TargetProperty="(Border.RenderTransform).(ScaleTransform.ScaleX)"
                                                              To="1.03" Duration="0:0:0.15"/>
                                             <DoubleAnimation Storyboard.TargetProperty="(Border.RenderTransform).(ScaleTransform.ScaleY)"
                                                              To="1.03" Duration="0:0:0.15"/>
+                                            
+                                            <!-- Quick Open Badge Fade In -->
+                                            <DoubleAnimation Storyboard.TargetName="QuickOpenBadge"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="1" Duration="0:0:0.2"/>
+                                            
+                                            <!-- Bounce Animation for the Badge -->
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="QuickOpenBadge"
+                                                                           Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                                           RepeatBehavior="Forever">
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-5">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <QuadraticEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <BounceEase EasingMode="EaseOut" Bounces="2" Bounciness="4"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:1.2" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
                                 <EventTrigger RoutedEvent="Border.MouseLeave">
                                     <BeginStoryboard>
                                         <Storyboard>
+                                            <!-- Card Scale Animation -->
                                             <DoubleAnimation Storyboard.TargetProperty="(Border.RenderTransform).(ScaleTransform.ScaleX)"
                                                              To="1.0" Duration="0:0:0.15"/>
                                             <DoubleAnimation Storyboard.TargetProperty="(Border.RenderTransform).(ScaleTransform.ScaleY)"
                                                              To="1.0" Duration="0:0:0.15"/>
+                                            
+                                            <!-- Quick Open Badge Fade Out -->
+                                            <DoubleAnimation Storyboard.TargetName="QuickOpenBadge"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="0" Duration="0:0:0.15"/>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
@@ -824,6 +854,35 @@
                                             ToolTip="🔒 LOCKED - Right-click → Lock/Unlock to unprotect">
                                         <TextBlock Text="🔒" FontSize="10"/>
                                     </Border>
+                                    
+                                    <!-- ✨ FUN Quick Open Action Badge - Appears on hover! ✨ -->
+                                    <Border x:Name="QuickOpenBadge"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Bottom"
+                                            Margin="0,0,0,-12"
+                                            Background="#2A5A50"
+                                            BorderBrush="#4CAF50"
+                                            BorderThickness="2"
+                                            CornerRadius="15"
+                                            Padding="10,4"
+                                            Opacity="0"
+                                            ToolTip="{Binding OpenActionHint}"
+                                            RenderTransformOrigin="0.5,0.5">
+                                        <Border.RenderTransform>
+                                            <TranslateTransform x:Name="BadgeTranslate" Y="0"/>
+                                        </Border.RenderTransform>
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="#4CAF50" BlurRadius="10" ShadowDepth="0" Opacity="0.6"/>
+                                        </Border.Effect>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding OpenActionEmoji}" FontSize="12" Margin="0,0,4,0"/>
+                                            <TextBlock Text="Double-Click!" 
+                                                       Foreground="#4CAF50" 
+                                                       FontSize="10" 
+                                                       FontWeight="Bold"
+                                                       VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
                                 </Grid>
                                 
                                 <!-- Name -->
@@ -856,18 +915,86 @@
             </ItemsControl>
         </ScrollViewer>
         
-        <!-- Footer -->
-        <Border Grid.Row="4" Background="#0A0A1A" Padding="30,15">
+        <!-- ✨ Fun Animated Footer with Tips ✨ -->
+        <Border Grid.Row="4" Background="#0A0A1A" Padding="20,12">
             <Grid>
-                <TextBlock Text="Double-click to open • Start typing to search and highlight matching items"
-                           Foreground="#505060"
-                           FontSize="12"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"/>
-                <TextBlock Text="HighlightMe v1.0"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Fun Tips Carousel -->
+                <Border Grid.Column="0" 
+                        Background="#1A2A40" 
+                        CornerRadius="20" 
+                        Padding="15,8"
+                        BorderBrush="#2A4A60"
+                        BorderThickness="1">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#4CAF50" BlurRadius="8" ShadowDepth="0" Opacity="0.3"/>
+                    </Border.Effect>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="💡" FontSize="14" Margin="0,0,8,0" VerticalAlignment="Center">
+                            <TextBlock.RenderTransform>
+                                <ScaleTransform x:Name="TipIconScale" ScaleX="1" ScaleY="1"/>
+                            </TextBlock.RenderTransform>
+                            <TextBlock.Triggers>
+                                <EventTrigger RoutedEvent="Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard RepeatBehavior="Forever">
+                                            <DoubleAnimation Storyboard.TargetName="TipIconScale"
+                                                             Storyboard.TargetProperty="ScaleX"
+                                                             From="1" To="1.2" Duration="0:0:0.5"
+                                                             AutoReverse="True"/>
+                                            <DoubleAnimation Storyboard.TargetName="TipIconScale"
+                                                             Storyboard.TargetProperty="ScaleY"
+                                                             From="1" To="1.2" Duration="0:0:0.5"
+                                                             AutoReverse="True"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </TextBlock.Triggers>
+                        </TextBlock>
+                        <TextBlock Foreground="#A0B0C0" FontSize="12" VerticalAlignment="Center">
+                            <Run Text="📂 Folders" Foreground="#FFD700"/>
+                            <Run Text=" • "/>
+                            <Run Text="📝 Text Files" Foreground="#4CAF50"/>
+                            <Run Text=" • "/>
+                            <Run Text="🖼️ Images" Foreground="#2196F3"/>
+                            <Run Text=" → Double-click to open instantly!" Foreground="#A0B0C0"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Center: Hover Hint -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="✨ Hover over items to see the" 
+                               Foreground="#606070" 
+                               FontSize="11"
+                               VerticalAlignment="Center"/>
+                    <Border Background="#2A5A50" 
+                            CornerRadius="10" 
+                            Padding="8,3" 
+                            Margin="5,0"
+                            BorderBrush="#4CAF50"
+                            BorderThickness="1">
+                        <TextBlock Text="Double-Click!" 
+                                   Foreground="#4CAF50" 
+                                   FontSize="10" 
+                                   FontWeight="Bold"/>
+                    </Border>
+                    <TextBlock Text="badge!" 
+                               Foreground="#606070" 
+                               FontSize="11"
+                               VerticalAlignment="Center"/>
+                </StackPanel>
+                
+                <!-- Version -->
+                <TextBlock Grid.Column="2"
+                           Text="HighlightMe v1.0"
                            Foreground="#404050"
                            FontSize="11"
-                           HorizontalAlignment="Right"
                            VerticalAlignment="Center"/>
             </Grid>
         </Border>
@@ -905,7 +1032,35 @@
                                 Margin="0,0,0,6" 
                                 Padding="12"
                                 BorderBrush="{StaticResource HighlightGlowBrush}"
-                                BorderThickness="{Binding IsHighlighted, Converter={StaticResource BoolToHighlightThicknessConverter}}">
+                                BorderThickness="{Binding IsHighlighted, Converter={StaticResource BoolToHighlightThicknessConverter}}"
+                                Cursor="Hand">
+                            
+                            <!-- List View Hover Triggers -->
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="Border.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="ListOpenBadge"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="1" Duration="0:0:0.15"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            To="#243A5A" Duration="0:0:0.15"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="Border.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="ListOpenBadge"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             To="0" Duration="0:0:0.15"/>
+                                            <ColorAnimation Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                            To="#1E2A4A" Duration="0:0:0.15"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Border.Triggers>
+                            
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="40"/>
@@ -940,6 +1095,26 @@
                                             Background="{Binding CategoryColor}" CornerRadius="8" Padding="4,1" Margin="4,0,0,0"
                                             ToolTip="{Binding CategoryName}">
                                         <TextBlock Text="📂" FontSize="10"/>
+                                    </Border>
+                                    
+                                    <!-- ✨ Open Action Badge - Shows on hover in list view ✨ -->
+                                    <Border x:Name="ListOpenBadge"
+                                            Background="#2A5A50"
+                                            BorderBrush="#4CAF50"
+                                            BorderThickness="1"
+                                            CornerRadius="8" 
+                                            Padding="6,2" 
+                                            Margin="10,0,0,0"
+                                            Opacity="0"
+                                            ToolTip="{Binding OpenActionHint}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding OpenActionEmoji}" FontSize="10" Margin="0,0,3,0"/>
+                                            <TextBlock Text="Open" 
+                                                       Foreground="#4CAF50" 
+                                                       FontSize="9" 
+                                                       FontWeight="Bold"
+                                                       VerticalAlignment="Center"/>
+                                        </StackPanel>
                                     </Border>
                                 </StackPanel>
                                 

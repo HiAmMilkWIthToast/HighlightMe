@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 
@@ -134,6 +135,38 @@ namespace HighlightMe.Models
         public string FormattedDate => DateModified.ToString("MMM dd, yyyy HH:mm");
 
         public string TypeDescription => IsDirectory ? "File Folder" : GetFileTypeDescription();
+
+        // Properties for identifying openable file types
+        public string FileType => IsDirectory ? "Folder" : System.IO.Path.GetExtension(Name)?.ToLowerInvariant() ?? "";
+
+        private static readonly string[] TextExtensions = { ".txt", ".log", ".md", ".json", ".xml", ".csv", ".ini", ".cfg", ".config", ".html", ".css", ".js", ".cs", ".py", ".java" };
+        private static readonly string[] ImageExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".ico", ".webp", ".tiff", ".svg" };
+
+        public bool IsTextFile => !IsDirectory && TextExtensions.Contains(FileType);
+        public bool IsImageFile => !IsDirectory && ImageExtensions.Contains(FileType);
+        public bool IsOpenable => IsDirectory || IsTextFile || IsImageFile;
+
+        public string OpenActionHint
+        {
+            get
+            {
+                if (IsDirectory) return "📂 Double-click to explore!";
+                if (IsTextFile) return "📝 Double-click to read!";
+                if (IsImageFile) return "🖼️ Double-click to view!";
+                return "📄 Double-click to open!";
+            }
+        }
+
+        public string OpenActionEmoji
+        {
+            get
+            {
+                if (IsDirectory) return "📂";
+                if (IsTextFile) return "📝";
+                if (IsImageFile) return "🖼️";
+                return "📄";
+            }
+        }
 
         private string GetFileTypeDescription()
         {

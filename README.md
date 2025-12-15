@@ -130,6 +130,24 @@ Contributions are welcome! Feel free to:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+> ⚠️ **STOP RIGHT THERE, CRIMINAL SCUM!** 🛑
+> 
+> Before you commit, make sure you're NOT uploading these folders:
+> 
+> | Folder | Status | Why? |
+> |--------|--------|------|
+> | `bin/` | 🚫 NOPE | Build output - rebuilds every time! |
+> | `obj/` | 🚫 NOPE | Temporary files - nobody wants 'em! |
+> | `.vs/` | 🚫 NOPE | Your VS secrets - keep 'em secret! |
+> 
+> ```
+> 🗑️ These are like dirty dishes - clean them up before guests arrive!
+> 
+> The .gitignore file should handle this, but double-check! 
+> When in doubt, run: git status
+> ```
+
+
 ## 📬 Contact
 
 **HiAmMilkWIthToast** - [GitHub](https://github.com/HiAmMilkWIthToast)
