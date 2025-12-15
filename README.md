@@ -38,6 +38,31 @@ Multiple built-in themes to match your style:
 - **List view** - Compact list format
 - **Customizable layout** - Adjust card size and margins
 
+---
+
+## 🎩 Pro Tip: The Magic Right-Click Menu!
+
+> **Psst... wanna know a secret?** 🤫
+
+Right-click on ANY file and unlock superpowers:
+
+| Action | What it does | Fun Factor |
+|--------|-------------|------------|
+| 📂 **Open** | Launch files like a boss | ⭐⭐⭐ |
+| 👁️ **Preview** | Peek at images & text files without opening them! | ⭐⭐⭐⭐⭐ |
+| 📍 **Open Location** | Teleport straight to the folder! | ⭐⭐⭐⭐ |
+| 📋 **Copy Path** | Yoink that file path! | ⭐⭐⭐ |
+| 📝 **Add Note** | Leave yourself secret messages | ⭐⭐⭐⭐ |
+| 🔒 **Lock** | Protecto patronum! 🪄 | ⭐⭐⭐⭐⭐ |
+| 👻 **Hide** | Now you see me... now you don't! | ⭐⭐⭐⭐ |
+
+```
+💡 TL;DR: Right-click = your new best friend
+   Double-click = speedrun to open files
+```
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
