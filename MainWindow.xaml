@@ -637,10 +637,10 @@
                     <Run Text="folders"/>
                 </TextBlock>
                 <TextBlock Text="  •  " Foreground="{DynamicResource SeparatorBrush}" FontSize="14"/>
-                <TextBlock Foreground="#00BFFF" FontSize="14" ToolTip="Number of executable files (.exe)">
+                <TextBlock Foreground="#00BFFF" FontSize="14" ToolTip="Number of apps (.exe files and shortcuts)">
                     <Run Text="⚙️"/>
                     <Run Text="{Binding ExeCount, Mode=OneWay}"/>
-                    <Run Text="exes"/>
+                    <Run Text="apps"/>
                 </TextBlock>
                 <TextBlock Text="  •  " Foreground="{DynamicResource SeparatorBrush}" FontSize="14"/>
                 <TextBlock Foreground="#FF69B4" FontSize="14" ToolTip="Number of image files (.png, .jpg, .gif, etc.)">

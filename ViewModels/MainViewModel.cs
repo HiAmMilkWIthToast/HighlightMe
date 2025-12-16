@@ -484,7 +484,7 @@ namespace HighlightMe.ViewModels
                 
                 // Calculate file type counts
                 FolderCount = DesktopItems.Count(i => i.IsDirectory);
-                ExeCount = DesktopItems.Count(i => !i.IsDirectory && i.FileType.Equals(".exe", StringComparison.OrdinalIgnoreCase));
+                ExeCount = DesktopItems.Count(i => !i.IsDirectory && (i.FileType.Equals(".exe", StringComparison.OrdinalIgnoreCase) || i.FileType.Equals(".lnk", StringComparison.OrdinalIgnoreCase)));
                 ImageCount = DesktopItems.Count(i => !i.IsDirectory && new[] { ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".ico", ".webp" }.Contains(i.FileType.ToLowerInvariant()));
                 TextCount = DesktopItems.Count(i => !i.IsDirectory && new[] { ".txt", ".md", ".log", ".ini", ".cfg" }.Contains(i.FileType.ToLowerInvariant()));
                 
