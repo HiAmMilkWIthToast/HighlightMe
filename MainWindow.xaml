@@ -64,6 +64,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/> <!-- Settings -->
+                    <ColumnDefinition Width="Auto"/> <!-- Help -->
                 </Grid.ColumnDefinitions>
                 
                 <!-- Title -->
@@ -79,7 +80,8 @@
                 </StackPanel>
                 
                 <!-- Search Box with History -->
-                <Grid Grid.Column="1" Margin="40,0">
+                <Grid Grid.Column="1" Margin="40,0"
+                      ToolTip="Type to search for files by name. Use the dropdown to see recent searches.">
                     <ComboBox x:Name="SearchComboBox"
                               Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                               ItemsSource="{Binding SearchHistory}"
@@ -226,7 +228,7 @@
                                   IsChecked="{Binding SearchInContents}"
                                   Background="Transparent"
                                   BorderThickness="0"
-                                  ToolTip="Search inside file contents (text files &lt; 1MB)">
+                                  ToolTip="Search inside text file contents (files under 1MB). When ON, finds files containing your search term, not just matching filenames.">
                         <TextBlock Text="📄" FontSize="16">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
@@ -272,8 +274,9 @@
                           Foreground="White"
                           VerticalAlignment="Center"
                           Margin="0,0,15,0"
-                              BorderBrush="#3A3A5A"
-                              BorderThickness="2">
+                          BorderBrush="#3A3A5A"
+                          BorderThickness="2"
+                          ToolTip="Sort files by Name, Date Modified, Size, or File Type">
                         <ComboBox.Style>
                             <Style TargetType="ComboBox">
                                 <Setter Property="Template">
@@ -374,7 +377,7 @@
                               VerticalAlignment="Center"
                               Margin="0,0,15,0"
                               Cursor="Hand"
-                              ToolTip="Show glowing highlights around matching desktop icons">
+                              ToolTip="Creates glowing highlight effects on your actual Windows desktop icons that match your search. Turn ON to visually find files faster!">
                     <ToggleButton.Template>
                         <ControlTemplate TargetType="ToggleButton">
                             <Border x:Name="border" 
@@ -410,7 +413,7 @@
                               VerticalAlignment="Center"
                               Margin="0,0,15,0"
                               Cursor="Hand"
-                              ToolTip="Toggle new item highlights">
+                              ToolTip="Highlight recently added files. When ON, new files since your last scan show a red badge so you can quickly spot what's new on your desktop.">
                     <ToggleButton.Template>
                         <ControlTemplate TargetType="ToggleButton">
                             <Border x:Name="border" 
@@ -446,7 +449,7 @@
                               VerticalAlignment="Center"
                               Margin="0,0,15,0"
                               Cursor="Hand"
-                              ToolTip="Toggle bouncing arrows">
+                              ToolTip="Show animated bouncing arrows pointing to matching files on your desktop. Great for quickly locating files visually!">
                     <ToggleButton.Template>
                         <ControlTemplate TargetType="ToggleButton">
                             <Border x:Name="border" 
@@ -479,7 +482,7 @@
                 <!-- Category Manager Button -->
                 <Button Grid.Column="6"
                         Command="{Binding OpenColorSettingsCommand}"
-                        ToolTip="Manage Category Colors"
+                        ToolTip="Customize highlight colors for different file types (Documents, Images, Videos, Audio, etc.). Make each category stand out with your preferred colors."
                         Cursor="Hand"
                         VerticalAlignment="Center"
                         Margin="0,0,15,0">
@@ -512,7 +515,7 @@
                               VerticalAlignment="Center"
                               Margin="0,0,10,0"
                               Cursor="Hand"
-                              ToolTip="Toggle between Grid and List view">
+                              ToolTip="Switch between Grid view (visual cards with icons) and List view (detailed table with file info)">
                     <ToggleButton.Template>
                         <ControlTemplate TargetType="ToggleButton">
                             <Border x:Name="border" 
@@ -548,14 +551,14 @@
                         Content="↻ Refresh"
                         Command="{Binding RefreshCommand}"
                         Style="{StaticResource ModernButtonStyle}"
-                        ToolTip="Refresh desktop items list"
+                        ToolTip="Rescan your desktop folder for new, modified, or deleted files. Use this after adding or removing files."
                         VerticalAlignment="Center"
                         Margin="0,0,10,0"/>
                 
                 <!-- Settings Button -->
                 <Button Grid.Column="9"
                         Command="{Binding OpenAppSettingsCommand}"
-                        ToolTip="App Settings - Themes, Layout, Icons"
+                        ToolTip="Open settings to customize themes (Dark/Light/Midnight), card sizes, icon sizes, and other appearance options."
                         Cursor="Hand"
                         VerticalAlignment="Center">
                     <Button.Template>
@@ -575,6 +578,36 @@
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter TargetName="border" Property="Background" Value="{DynamicResource InputBorderBrush}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                
+                <!-- Help Button -->
+                <Button Grid.Column="10"
+                        Command="{Binding OpenHelpCommand}"
+                        ToolTip="Open the user guide to learn how to use all features of HighlightMe."
+                        Cursor="Hand"
+                        VerticalAlignment="Center"
+                        Margin="10,0,0,0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" 
+                                    Background="#2A5A2A" 
+                                    CornerRadius="10" 
+                                    Padding="15,10"
+                                    BorderThickness="2"
+                                    BorderBrush="#3A7A3A">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="❓" FontSize="16" Margin="0,0,8,0"/>
+                                    <TextBlock Text="Help" 
+                                               Foreground="#90EE90" FontSize="13" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#3A6A3A"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

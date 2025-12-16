@@ -107,6 +107,7 @@ namespace HighlightMe.ViewModels
             PreviewFileCommand = new RelayCommand(PreviewFile);
             ToggleLockCommand = new RelayCommand(ToggleLock);
             OpenAppSettingsCommand = new RelayCommand(_ => OpenAppSettings());
+            OpenHelpCommand = new RelayCommand(_ => OpenHelp());
             
             // Apply initial layout settings
             ApplyLayoutSettings();
@@ -285,6 +286,7 @@ namespace HighlightMe.ViewModels
         public ICommand PreviewFileCommand { get; }
         public ICommand ToggleLockCommand { get; }
         public ICommand OpenAppSettingsCommand { get; }
+        public ICommand OpenHelpCommand { get; }
         
         public int CardWidth
         {
@@ -358,6 +360,13 @@ namespace HighlightMe.ViewModels
         {
             var themeService = App.ThemeService ?? new ThemeService();
             var window = new Views.AppSettingsWindow(_appSettingsService, themeService);
+            window.Owner = Application.Current.MainWindow;
+            window.ShowDialog();
+        }
+
+        private void OpenHelp()
+        {
+            var window = new Views.HelpGuideWindow();
             window.Owner = Application.Current.MainWindow;
             window.ShowDialog();
         }
