@@ -75,5 +75,21 @@ namespace HighlightMe
                 }
             }
         }
+
+        private void OpenGitHub_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = "https://github.com/HiAmMilkWIthToast/HighlightMe",
+                    UseShellExecute = true
+                });
+            }
+            catch
+            {
+                // Ignore errors opening browser
+            }
+        }
     }
 }
