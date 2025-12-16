@@ -89,9 +89,9 @@
                               IsTextSearchEnabled="False"
                               StaysOpenOnEdit="True"
                               VerticalAlignment="Center"
-                              Background="#2A2A4A"
-                              Foreground="{StaticResource TextPrimaryBrush}"
-                              BorderBrush="#3A3A5A"
+                              Background="{DynamicResource InputBackgroundBrush}"
+                              Foreground="{DynamicResource TextPrimaryBrush}"
+                              BorderBrush="{DynamicResource InputBorderBrush}"
                               BorderThickness="2"
                               Padding="15,12"
                               FontSize="16">
@@ -107,7 +107,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="0" Text="{Binding}" 
-                                               Foreground="{StaticResource TextPrimaryBrush}"
+                                               Foreground="{DynamicResource TextPrimaryBrush}"
                                                VerticalAlignment="Center"
                                                Margin="5,5"/>
                                     <Button Grid.Column="1" Content="✕" 
@@ -147,8 +147,8 @@
                                                                  Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}"
                                                                  Background="Transparent"
                                                                  BorderThickness="0"
-                                                                 Foreground="{StaticResource TextPrimaryBrush}"
-                                                                 CaretBrush="{StaticResource AccentBrush}"
+                                                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                                                 CaretBrush="{DynamicResource AccentBrush}"
                                                                  Padding="10,0"
                                                                  VerticalAlignment="Center"
                                                                  FontSize="16"/>
@@ -158,7 +158,7 @@
                                                                       BorderThickness="0"
                                                                       Padding="10,0"
                                                                       Cursor="Hand">
-                                                            <TextBlock Text="▼" Foreground="#606080" FontSize="10"/>
+                                                            <TextBlock Text="▼" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10"/>
                                                         </ToggleButton>
                                                     </Grid>
                                                 </Border>
@@ -167,8 +167,8 @@
                                                        IsOpen="{TemplateBinding IsDropDownOpen}"
                                                        Placement="Bottom"
                                                        PopupAnimation="Slide">
-                                                    <Border Background="#1E2A4A"
-                                                            BorderBrush="#3A3A5A"
+                                                    <Border Background="{DynamicResource InputBackgroundBrush}"
+                                                            BorderBrush="{DynamicResource InputBorderBrush}"
                                                             BorderThickness="1"
                                                             CornerRadius="8"
                                                             Margin="0,5,0,0"
@@ -699,34 +699,34 @@
                             
                             <!-- Context Menu -->
                             <Border.ContextMenu>
-                                <ContextMenu Background="#1E2A4A" BorderBrush="#3A3A5A" BorderThickness="1">
+                                <ContextMenu Background="{DynamicResource InputBackgroundBrush}" BorderBrush="{DynamicResource InputBorderBrush}" BorderThickness="1">
                                     <MenuItem Header="📂 Open" 
                                               Command="{Binding DataContext.OpenItemCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                               CommandParameter="{Binding}"
-                                              Foreground="{StaticResource TextPrimaryBrush}"/>
+                                              Foreground="{DynamicResource TextPrimaryBrush}"/>
                                     <MenuItem Header="👁️ Preview" 
                                               Click="PreviewMenuItem_Click"
-                                              Foreground="{StaticResource TextPrimaryBrush}"
+                                              Foreground="{DynamicResource TextPrimaryBrush}"
                                               ToolTip="Preview text or image files"/>
                                     <MenuItem Header="📍 Open File Location" 
                                               Command="{Binding DataContext.OpenLocationCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                               CommandParameter="{Binding}"
-                                              Foreground="{StaticResource TextPrimaryBrush}"/>
-                                    <Separator Background="#3A3A5A"/>
+                                              Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                    <Separator Background="{DynamicResource SeparatorBrush}"/>
                                     <MenuItem Header="📋 Copy Path" 
                                               Click="CopyPathMenuItem_Click"
-                                              Foreground="{StaticResource TextPrimaryBrush}"/>
-                                    <Separator Background="#3A3A5A"/>
+                                              Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                    <Separator Background="{DynamicResource SeparatorBrush}"/>
                                     <MenuItem Header="📝 Add/Edit Note" 
                                               Click="AddEditNoteMenuItem_Click"
-                                              Foreground="{StaticResource TextPrimaryBrush}"/>
-                                    <Separator Background="#3A3A5A"/>
+                                              Foreground="{DynamicResource TextPrimaryBrush}"/>
+                                    <Separator Background="{DynamicResource SeparatorBrush}"/>
                                     <MenuItem Header="👻 Hide/Unhide" 
                                               Click="ToggleHiddenMenuItem_Click"
-                                              Foreground="{StaticResource TextPrimaryBrush}"/>
+                                              Foreground="{DynamicResource TextPrimaryBrush}"/>
                                     <MenuItem Header="🔒 Lock/Unlock" 
                                               Click="ToggleLockMenuItem_Click"
-                                              Foreground="{StaticResource TextPrimaryBrush}"
+                                              Foreground="{DynamicResource TextPrimaryBrush}"
                                               ToolTip="Lock file to prevent deletion"/>
                                 </ContextMenu>
                             </Border.ContextMenu>
@@ -921,7 +921,7 @@
                                 <!-- Name -->
                                 <TextBlock Grid.Row="1" 
                                            Text="{Binding Name}"
-                                           Foreground="{StaticResource TextPrimaryBrush}"
+                                           Foreground="{DynamicResource TextPrimaryBrush}"
                                            FontSize="13"
                                            FontWeight="SemiBold"
                                            TextTrimming="CharacterEllipsis"
@@ -932,11 +932,11 @@
                                 <!-- Info -->
                                 <StackPanel Grid.Row="2" Margin="0,8,0,0" HorizontalAlignment="Center">
                                     <TextBlock Text="{Binding FormattedSize}"
-                                               Foreground="{StaticResource TextSecondaryBrush}"
+                                               Foreground="{DynamicResource TextSecondaryBrush}"
                                                FontSize="11"
                                                TextAlignment="Center"/>
                                     <TextBlock Text="{Binding TypeDescription}"
-                                               Foreground="#505070"
+                                               Foreground="{DynamicResource TextMutedBrush}"
                                                FontSize="10"
                                                TextAlignment="Center"
                                                Margin="0,2,0,0"/>
@@ -1039,7 +1039,7 @@
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock Text="⏳" FontSize="48" HorizontalAlignment="Center"/>
                 <TextBlock Text="Scanning Desktop..."
-                           Foreground="{StaticResource TextPrimaryBrush}"
+                           Foreground="{DynamicResource TextPrimaryBrush}"
                            FontSize="18"
                            Margin="0,15,0,0"/>
             </StackPanel>
@@ -1060,11 +1060,11 @@
                 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Background="#1E2A4A" 
+                        <Border Background="{DynamicResource CardBackgroundBrush}" 
                                 CornerRadius="8" 
                                 Margin="0,0,0,6" 
                                 Padding="12"
-                                BorderBrush="{StaticResource HighlightGlowBrush}"
+                                BorderBrush="{DynamicResource HighlightGlowBrush}"
                                 BorderThickness="{Binding IsHighlighted, Converter={StaticResource BoolToHighlightThicknessConverter}}"
                                 Cursor="Hand">
                             
@@ -1109,7 +1109,7 @@
                                 <!-- Name + Badges -->
                                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                                     <TextBlock Text="{Binding Name}" 
-                                               Foreground="{StaticResource TextPrimaryBrush}" 
+                                               Foreground="{DynamicResource TextPrimaryBrush}" 
                                                FontSize="13"
                                                VerticalAlignment="Center"/>
                                     <Border Visibility="{Binding HasNote, Converter={StaticResource BoolToVisibilityConverter}}"
@@ -1154,7 +1154,7 @@
                                 <!-- Type -->
                                 <TextBlock Grid.Column="2" 
                                            Text="{Binding FileType}" 
-                                           Foreground="#808090" 
+                                           Foreground="{DynamicResource TextSecondaryBrush}" 
                                            FontSize="11"
                                            VerticalAlignment="Center"
                                            Margin="15,0"/>
@@ -1162,14 +1162,14 @@
                                 <!-- Size -->
                                 <TextBlock Grid.Column="3" 
                                            Text="{Binding FormattedSize}" 
-                                           Foreground="#808090" 
+                                           Foreground="{DynamicResource TextSecondaryBrush}" 
                                            FontSize="11"
                                            VerticalAlignment="Center"/>
                                 
                                 <!-- Date -->
                                 <TextBlock Grid.Column="4" 
                                            Text="{Binding DateModified, StringFormat='{}{0:MMM dd, yyyy}'}"
-                                           Foreground="#606080" 
+                                           Foreground="{DynamicResource TextMutedBrush}" 
                                            FontSize="11"
                                            VerticalAlignment="Center"/>
                             </Grid>
