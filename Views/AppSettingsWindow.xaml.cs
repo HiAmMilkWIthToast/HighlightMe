@@ -48,7 +48,7 @@ namespace HighlightMe.Views
                     BorderThickness = new Thickness(isSelected ? 3 : 1),
                     BorderBrush = isSelected 
                         ? new SolidColorBrush((Color)ColorConverter.ConvertFromString(ThemeService.GetThemeAccentColor(theme)))
-                        : new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3A3A5A")),
+                        : (Brush)FindResource("InputBorderBrush"),
                     Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(ThemeService.GetThemePreviewColor(theme)))
                 };
                 
@@ -151,11 +151,11 @@ namespace HighlightMe.Views
                     Cursor = System.Windows.Input.Cursors.Hand,
                     Background = isSelected 
                         ? (Brush)FindResource("AccentBrush")
-                        : new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2A2A4A")),
+                        : (Brush)FindResource("InputBackgroundBrush"),
                     BorderThickness = new Thickness(2),
                     BorderBrush = isSelected 
                         ? (Brush)FindResource("AccentLightBrush")
-                        : new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3A3A5A"))
+                        : (Brush)FindResource("InputBorderBrush")
                 };
                 
                 var stack = new StackPanel { HorizontalAlignment = HorizontalAlignment.Center };
@@ -165,7 +165,7 @@ namespace HighlightMe.Views
                     Text = labels[i],
                     FontSize = 14,
                     FontWeight = FontWeights.SemiBold,
-                    Foreground = new SolidColorBrush(Colors.White),
+                    Foreground = (Brush)FindResource("TextPrimaryBrush"),
                     HorizontalAlignment = HorizontalAlignment.Center
                 };
                 stack.Children.Add(nameText);
@@ -174,7 +174,7 @@ namespace HighlightMe.Views
                 {
                     Text = widths[i],
                     FontSize = 11,
-                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A0A0A0")),
+                    Foreground = (Brush)FindResource("TextSecondaryBrush"),
                     HorizontalAlignment = HorizontalAlignment.Center,
                     Margin = new Thickness(0, 3, 0, 0)
                 };
@@ -231,8 +231,8 @@ namespace HighlightMe.Views
                     CornerRadius = new CornerRadius(10),
                     Cursor = System.Windows.Input.Cursors.Hand,
                     Background = isSelected 
-                        ? new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3D5A80"))
-                        : new SolidColorBrush((Color)ColorConverter.ConvertFromString("#252540")),
+                        ? (Brush)FindResource("HighlightBackgroundBrush")
+                        : (Brush)FindResource("InputBackgroundBrush"),
                     BorderThickness = new Thickness(2),
                     BorderBrush = isSelected 
                         ? (Brush)FindResource("AccentBrush")
@@ -261,7 +261,7 @@ namespace HighlightMe.Views
                     Text = pack.Name,
                     FontSize = 14,
                     FontWeight = FontWeights.SemiBold,
-                    Foreground = new SolidColorBrush(Colors.White)
+                    Foreground = (Brush)FindResource("TextPrimaryBrush")
                 };
                 textStack.Children.Add(nameText);
                 
@@ -269,7 +269,7 @@ namespace HighlightMe.Views
                 {
                     Text = pack.Description,
                     FontSize = 12,
-                    Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#808090")),
+                    Foreground = (Brush)FindResource("TextSecondaryBrush"),
                     Margin = new Thickness(0, 2, 0, 0)
                 };
                 textStack.Children.Add(descText);

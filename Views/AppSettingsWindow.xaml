@@ -40,7 +40,7 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="TabItem">
                                 <Border x:Name="Border" 
-                                        Background="#2A2A4A" 
+                                        Background="{DynamicResource InputBackgroundBrush}" 
                                         CornerRadius="8" 
                                         Padding="18,10" 
                                         Margin="0,0,8,0"
@@ -54,7 +54,7 @@
                                         <Setter TargetName="Border" Property="Background" Value="{DynamicResource AccentBrush}"/>
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="Border" Property="Background" Value="#3A3A5A"/>
+                                        <Setter TargetName="Border" Property="Background" Value="{DynamicResource InputBorderBrush}"/>
                                     </Trigger>
                                     <MultiTrigger>
                                         <MultiTrigger.Conditions>
@@ -164,7 +164,7 @@
                 <Button x:Name="ResetButton"
                         Content="↻ Reset to Defaults"
                         HorizontalAlignment="Left"
-                        Background="#3A3A5A"
+                        Background="{DynamicResource InputBackgroundBrush}"
                         Foreground="{DynamicResource TextPrimaryBrush}"
                         BorderThickness="0"
                         Padding="15,8"
