@@ -808,8 +808,7 @@
                                               Foreground="{DynamicResource TextPrimaryBrush}"
                                               ToolTip="Preview text or image files"/>
                                     <MenuItem Header="📍 Open File Location" 
-                                              Command="{Binding DataContext.OpenLocationCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                              CommandParameter="{Binding}"
+                                              Click="OpenFileLocationMenuItem_Click"
                                               Foreground="{DynamicResource TextPrimaryBrush}"/>
                                     <Separator Background="{DynamicResource SeparatorBrush}"/>
                                     <MenuItem Header="📋 Copy Path" 

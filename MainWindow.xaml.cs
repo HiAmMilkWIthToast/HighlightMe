@@ -76,6 +76,24 @@ namespace HighlightMe
             }
         }
 
+        private void OpenFileLocationMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem menuItem && 
+                menuItem.DataContext is DesktopItem item)
+            {
+                try
+                {
+                    // Open Explorer and select the file/folder
+                    System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{item.FullPath}\"");
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show($"Could not open location: {ex.Message}", "Error", 
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
         private void OpenGitHub_Click(object sender, RoutedEventArgs e)
         {
             try
