@@ -45,6 +45,9 @@ namespace HighlightMe.ViewModels
         private int _cardMargin = 8;
         private bool _showFileDetails = true;
 
+        // User info
+        public string UserName => Environment.UserName;
+
         public MainViewModel()
         {
             _scannerService = new DesktopScannerService();
