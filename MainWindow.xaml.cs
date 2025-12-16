@@ -186,5 +186,117 @@ namespace HighlightMe
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void RenameMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem menuItem && 
+                menuItem.DataContext is DesktopItem item)
+            {
+                try
+                {
+                    string currentName = item.Name;
+                    string newName = Microsoft.VisualBasic.Interaction.InputBox(
+                        "Enter the new name:",
+                        "Rename",
+                        currentName);
+                    
+                    if (!string.IsNullOrWhiteSpace(newName) && newName != currentName)
+                    {
+                        string directory = System.IO.Path.GetDirectoryName(item.FullPath) ?? "";
+                        string newPath = System.IO.Path.Combine(directory, newName);
+                        
+                        // Check if target already exists
+                        if (System.IO.File.Exists(newPath) || System.IO.Directory.Exists(newPath))
+                        {
+                            MessageBox.Show($"An item named '{newName}' already exists.", 
+                                "Rename Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            return;
+                        }
+                        
+                        if (item.IsDirectory)
+                        {
+                            System.IO.Directory.Move(item.FullPath, newPath);
+                        }
+                        else
+                        {
+                            System.IO.File.Move(item.FullPath, newPath);
+                        }
+                        
+                        // Refresh the view
+                        if (DataContext is MainViewModel viewModel)
+                        {
+                            viewModel.RefreshCommand.Execute(null);
+                        }
+                        
+                        MessageBox.Show($"Renamed to '{newName}'", "Success", 
+                            MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show($"Error renaming: {ex.Message}", "Error", 
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem menuItem && 
+                menuItem.DataContext is DesktopItem item)
+            {
+                try
+                {
+                    // Check if locked
+                    if (item.IsLocked)
+                    {
+                        MessageBox.Show($"'{item.Name}' is locked. Unlock it first before deleting.", 
+                            "Cannot Delete", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                    
+                    // Confirmation dialog
+                    var result = MessageBox.Show(
+                        $"Are you sure you want to delete '{item.Name}'?\n\nThis will move it to the Recycle Bin.",
+                        "Confirm Delete",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning);
+                    
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        if (item.IsDirectory)
+                        {
+                            // Move folder to recycle bin using shell
+                            Microsoft.VisualBasic.FileIO.FileSystem.DeleteDirectory(
+                                item.FullPath,
+                                Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
+                                Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+                        }
+                        else
+                        {
+                            // Move file to recycle bin using shell
+                            Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(
+                                item.FullPath,
+                                Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
+                                Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+                        }
+                        
+                        // Refresh the view
+                        if (DataContext is MainViewModel viewModel)
+                        {
+                            viewModel.RefreshCommand.Execute(null);
+                        }
+                        
+                        MessageBox.Show($"'{item.Name}' has been moved to the Recycle Bin.", "Deleted", 
+                            MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show($"Error deleting: {ex.Message}", "Error", 
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
     }
 }

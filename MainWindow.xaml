@@ -827,6 +827,15 @@
                                               Click="ToggleLockMenuItem_Click"
                                               Foreground="{DynamicResource TextPrimaryBrush}"
                                               ToolTip="Lock file to prevent deletion"/>
+                                    <Separator Background="{DynamicResource SeparatorBrush}"/>
+                                    <MenuItem Header="✏️ Rename" 
+                                              Click="RenameMenuItem_Click"
+                                              Foreground="{DynamicResource TextPrimaryBrush}"
+                                              ToolTip="Rename this file or folder"/>
+                                    <MenuItem Header="🗑️ Delete" 
+                                              Click="DeleteMenuItem_Click"
+                                              Foreground="#FF6666"
+                                              ToolTip="Delete this file or folder (with confirmation)"/>
                                 </ContextMenu>
                             </Border.ContextMenu>
                             

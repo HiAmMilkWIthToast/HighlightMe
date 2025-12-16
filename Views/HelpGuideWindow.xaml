@@ -93,6 +93,22 @@
                     </StackPanel>
                 </Border>
                 
+                <Border Style="{StaticResource FeatureItemStyle}">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource FeatureTitleStyle}" Text="✏️ Rename Files &amp; Folders"/>
+                        <TextBlock Style="{StaticResource FeatureDescStyle}" 
+                                   Text="Right-click any item and select 'Rename' to give it a new name. A dialog will prompt you for the new name."/>
+                    </StackPanel>
+                </Border>
+                
+                <Border Style="{StaticResource FeatureItemStyle}">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource FeatureTitleStyle}" Text="🗑️ Delete Files &amp; Folders"/>
+                        <TextBlock Style="{StaticResource FeatureDescStyle}" 
+                                   Text="Right-click and select 'Delete' to remove items safely. A confirmation dialog appears first, and items are moved to the Recycle Bin so you can recover them if needed."/>
+                    </StackPanel>
+                </Border>
+                
                 <!-- Visual Features -->
                 <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="✨ Visual Highlighting Features"/>
                 
