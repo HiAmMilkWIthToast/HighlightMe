@@ -622,13 +622,37 @@
                 <TextBlock Foreground="{DynamicResource TextSecondaryBrush}" FontSize="14">
                     <Run Text="📁"/>
                     <Run Text="{Binding TotalItems, Mode=OneWay}"/>
-                    <Run Text="total items"/>
+                    <Run Text="total"/>
                 </TextBlock>
                 <TextBlock Text="  •  " Foreground="{DynamicResource SeparatorBrush}" FontSize="14"/>
                 <TextBlock Foreground="{DynamicResource AccentLightBrush}" FontSize="14">
                     <Run Text="✨"/>
                     <Run Text="{Binding MatchingItems, Mode=OneWay}"/>
                     <Run Text="matching"/>
+                </TextBlock>
+                <TextBlock Text="  •  " Foreground="{DynamicResource SeparatorBrush}" FontSize="14"/>
+                <TextBlock Foreground="#FFD700" FontSize="14" ToolTip="Number of folders">
+                    <Run Text="📂"/>
+                    <Run Text="{Binding FolderCount, Mode=OneWay}"/>
+                    <Run Text="folders"/>
+                </TextBlock>
+                <TextBlock Text="  •  " Foreground="{DynamicResource SeparatorBrush}" FontSize="14"/>
+                <TextBlock Foreground="#00BFFF" FontSize="14" ToolTip="Number of executable files (.exe)">
+                    <Run Text="⚙️"/>
+                    <Run Text="{Binding ExeCount, Mode=OneWay}"/>
+                    <Run Text="exes"/>
+                </TextBlock>
+                <TextBlock Text="  •  " Foreground="{DynamicResource SeparatorBrush}" FontSize="14"/>
+                <TextBlock Foreground="#FF69B4" FontSize="14" ToolTip="Number of image files (.png, .jpg, .gif, etc.)">
+                    <Run Text="🖼️"/>
+                    <Run Text="{Binding ImageCount, Mode=OneWay}"/>
+                    <Run Text="images"/>
+                </TextBlock>
+                <TextBlock Text="  •  " Foreground="{DynamicResource SeparatorBrush}" FontSize="14"/>
+                <TextBlock Foreground="#90EE90" FontSize="14" ToolTip="Number of text files (.txt, .md, .log, etc.)">
+                    <Run Text="📝"/>
+                    <Run Text="{Binding TextCount, Mode=OneWay}"/>
+                    <Run Text="texts"/>
                 </TextBlock>
                 <TextBlock Text="  •  " Foreground="{DynamicResource SeparatorBrush}" FontSize="14"/>
                 <TextBlock Foreground="{DynamicResource HighlightGlowBrush}" FontSize="14">

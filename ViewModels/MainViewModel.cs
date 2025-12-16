@@ -29,6 +29,10 @@ namespace HighlightMe.ViewModels
         private int _matchingItems;
         private int _desktopHighlightCount;
         private int _newItemCount;
+        private int _folderCount;
+        private int _exeCount;
+        private int _imageCount;
+        private int _textCount;
         private bool _isScanning;
         private bool _showDesktopHighlights = true;
         private bool _showNewItemHighlights = true;
@@ -188,6 +192,30 @@ namespace HighlightMe.ViewModels
         {
             get => _newItemNotification;
             set { _newItemNotification = value; OnPropertyChanged(); }
+        }
+
+        public int FolderCount
+        {
+            get => _folderCount;
+            set { _folderCount = value; OnPropertyChanged(); }
+        }
+
+        public int ExeCount
+        {
+            get => _exeCount;
+            set { _exeCount = value; OnPropertyChanged(); }
+        }
+
+        public int ImageCount
+        {
+            get => _imageCount;
+            set { _imageCount = value; OnPropertyChanged(); }
+        }
+
+        public int TextCount
+        {
+            get => _textCount;
+            set { _textCount = value; OnPropertyChanged(); }
         }
 
         public bool IsScanning
@@ -453,6 +481,12 @@ namespace HighlightMe.ViewModels
                 
                 TotalItems = DesktopItems.Count;
                 NewItemCount = _watcherService.NewItemCount;
+                
+                // Calculate file type counts
+                FolderCount = DesktopItems.Count(i => i.IsDirectory);
+                ExeCount = DesktopItems.Count(i => !i.IsDirectory && i.FileType.Equals(".exe", StringComparison.OrdinalIgnoreCase));
+                ImageCount = DesktopItems.Count(i => !i.IsDirectory && new[] { ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".ico", ".webp" }.Contains(i.FileType.ToLowerInvariant()));
+                TextCount = DesktopItems.Count(i => !i.IsDirectory && new[] { ".txt", ".md", ".log", ".ini", ".cfg" }.Contains(i.FileType.ToLowerInvariant()));
                 
                 // Refresh desktop icon positions
                 _highlightService.RefreshIconPositions();
