@@ -4,8 +4,8 @@
         xmlns:vm="clr-namespace:HighlightMe.ViewModels"
         xmlns:converters="clr-namespace:HighlightMe.Converters"
         Title="HighlightMe - Desktop Scanner"
-        Height="750" Width="1100"
-        MinHeight="500" MinWidth="700"
+        Height="870" Width="1686"
+        MinHeight="870" MinWidth="1686"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource PrimaryBackgroundBrush}">
     
@@ -55,7 +55,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" MinWidth="250"/>
                     <ColumnDefinition Width="Auto"/> <!-- Sort -->
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
