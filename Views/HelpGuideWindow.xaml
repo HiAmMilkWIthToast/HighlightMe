@@ -85,6 +85,14 @@
                     </StackPanel>
                 </Border>
                 
+                <Border Style="{StaticResource FeatureItemStyle}">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource FeatureTitleStyle}" Text="➕ Create Files &amp; Folders"/>
+                        <TextBlock Style="{StaticResource FeatureDescStyle}" 
+                                   Text="Click the 'New' button in the toolbar to create new text files or folders directly on your desktop. A dialog will prompt you for a name."/>
+                    </StackPanel>
+                </Border>
+                
                 <!-- Visual Features -->
                 <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="✨ Visual Highlighting Features"/>
                 

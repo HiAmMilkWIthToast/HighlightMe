@@ -9,4 +9,8 @@
     <AssemblyName>HighlightMe</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+  </ItemGroup>
+
 </Project>
