@@ -1,157 +1,85 @@
-# 🔍 HighlightMe
+# HighlightMe
 
-A modern WPF desktop application for finding and highlighting files on your Windows desktop instantly.
+A WPF desktop app for quickly finding and highlighting files on your Windows desktop.
 
 ![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat&logo=dotnet)
 ![WPF](https://img.shields.io/badge/WPF-Desktop-0078D4?style=flat&logo=windows)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-## ✨ Features
+## What it does
 
-### 🔎 Instant Search
-- **Real-time search** - Find files as you type
-- **Search history** - Quick access to recent searches
-- **Content search** - Search inside text files (< 1MB)
+Search for files on your desktop and get visual feedback showing you exactly where they are. The app highlights matching files with a glow effect and bouncing arrows so you can spot them instantly.
 
-### 🖥️ Desktop Highlighting
-- **Glowing highlights** - Visual glow effects around matching desktop icons
-- **Bouncing arrows** - Animated arrows pointing to found files
-- **New item detection** - Automatically highlights newly added files
+**Search features:**
+- Real-time filtering as you type
+- Search inside text files (< 1MB)
+- Search history
 
-### 🎨 Theming
-Multiple built-in themes to match your style:
-- 🌑 **Dark** - Sleek dark mode
-- ☀️ **Light** - Clean light mode
-- 🌊 **Ocean** - Cool blue tones
-- 🌲 **Forest** - Natural green palette
-- 🌅 **Sunset** - Warm orange hues
+**Visual highlights:**
+- Glow effect around matching desktop icons
+- Bouncing arrows pointing to files
+- Auto-highlight for newly added files
 
-### 📁 File Management
-- **Preview files** - Quick preview for images and text files
-- **Add notes** - Attach notes to any file
-- **Lock files** - Prevent accidental deletion
-- **Hide/Show files** - Toggle file visibility
-- **Category colors** - Organize files with custom color categories
+**File management:**
+- Preview images and text files
+- Add notes to files
+- Lock files to prevent deletion
+- Hide/show files
+- Organize with color categories
 
-### 📐 Flexible Views
-- **Grid view** - Visual card-based layout
-- **List view** - Compact list format
-- **Customizable layout** - Adjust card size and margins
+**Themes:** Dark, Light, Ocean, Forest, Sunset
 
----
+## Getting Started
 
-## 🎩 Pro Tip: The Magic Right-Click Menu!
-
-> **Psst... wanna know a secret?** 🤫
-
-Right-click on ANY file and unlock superpowers:
-
-| Action | What it does | Fun Factor |
-|--------|-------------|------------|
-| 📂 **Open** | Launch files like a boss | ⭐⭐⭐ |
-| 👁️ **Preview** | Peek at images & text files without opening them! | ⭐⭐⭐⭐⭐ |
-| 📍 **Open Location** | Teleport straight to the folder! | ⭐⭐⭐⭐ |
-| 📋 **Copy Path** | Yoink that file path! | ⭐⭐⭐ |
-| 📝 **Add Note** | Leave yourself secret messages | ⭐⭐⭐⭐ |
-| 🔒 **Lock** | Protecto patronum! 🪄 | ⭐⭐⭐⭐⭐ |
-| 👻 **Hide** | Now you see me... now you don't! | ⭐⭐⭐⭐ |
-
-```
-💡 TL;DR: Right-click = your new best friend
-   Double-click = speedrun to open files
-```
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
+**Requirements:**
 - Windows 10/11
 - [.NET 8.0 Desktop Runtime](https://dotnet.microsoft.com/download/dotnet/8.0)
 
-### Installation
+**Build from source:**
+```bash
+git clone https://github.com/HiAmMilkWIthToast/HighlightMe.git
+```
+Open `HighlightMe.csproj` in Visual Studio 2022+ and build.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/HiAmMilkWIthToast/HighlightMe.git
-   ```
+## How to use
 
-2. Open `HighlightMe.csproj` in Visual Studio 2022+
+- Type in the search box to find files
+- Toggle desktop glow, arrows, or new item detection from the toolbar
+- Right-click any file for actions (open, preview, copy path, add note, lock, hide)
+- Double-click to open
+- Click the gear icon for theme and layout settings
 
-3. Build and run the project
-
-### Or download the latest release
-*Coming soon*
-
-## 🎮 Usage
-
-1. **Search** - Type in the search box to find files
-2. **Toggle Features** - Use the toolbar buttons:
-   - 🖥️ **Desktop Glow** - Highlight matching icons on desktop
-   - 📦 **New Items** - Show new file notifications
-   - ↗️ **Arrows** - Display bouncing arrows
-3. **Right-click** any item for options (open, preview, add notes, etc.)
-4. **Double-click** to open a file
-5. **Settings** - Click ⚙️ to customize themes and layout
-
-## 📷 Screenshots
-
-*Screenshots coming soon*
-
-## 🏗️ Project Structure
+## Project layout
 
 ```
 HighlightMe/
-├── Views/                 # XAML windows and dialogs
-├── ViewModels/           # MVVM view models
-├── Models/               # Data models
-├── Services/             # Business logic services
-├── Themes/               # Theme resource dictionaries
-├── Converters/           # Value converters
-└── Helpers/              # Utility classes
+├── Views/          # XAML windows and dialogs
+├── ViewModels/     # MVVM view models
+├── Models/         # Data models
+├── Services/       # Business logic
+├── Themes/         # Theme resources
+├── Converters/     # Value converters
+└── Helpers/        # Utilities
 ```
 
-## 🛠️ Built With
+## Built with
 
-- **WPF** - Windows Presentation Foundation
-- **.NET 8.0** - Latest .NET framework
-- **MVVM Pattern** - Clean architecture
+- WPF (.NET 8.0)
+- MVVM pattern
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT - see [LICENSE](LICENSE)
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome! Feel free to:
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. Fork the repo
+2. Create a feature branch
+3. Make your changes
+4. Open a PR
 
-> ⚠️ **STOP RIGHT THERE, CRIMINAL SCUM!** 🛑
-> 
-> Before you commit, make sure you're NOT uploading these folders:
-> 
-> | Folder | Status | Why? |
-> |--------|--------|------|
-> | `bin/` | 🚫 NOPE | Build output - rebuilds every time! |
-> | `obj/` | 🚫 NOPE | Temporary files - nobody wants 'em! |
-> | `.vs/` | 🚫 NOPE | Your VS secrets - keep 'em secret! |
-> 
-> ```
-> 🗑️ These are like dirty dishes - clean them up before guests arrive!
-> 
-> The .gitignore file should handle this, but double-check! 
-> When in doubt, run: git status
-> ```
-
-
-## 📬 Contact
-
-**HiAmMilkWIthToast** - [GitHub](https://github.com/HiAmMilkWIthToast)
+Make sure `bin/`, `obj/`, and `.vs/` are in your `.gitignore` (they should be already).
 
 ---
 
-⭐ **Star this repo if you find it useful!**
+Questions or issues? Open an issue on GitHub.
