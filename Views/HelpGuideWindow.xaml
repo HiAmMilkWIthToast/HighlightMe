@@ -4,19 +4,19 @@
         Title="HighlightMe - User Guide"
         Height="650" Width="700"
         WindowStartupLocation="CenterOwner"
-        Background="#1A1A2E"
+        Background="{DynamicResource PrimaryBackgroundBrush}"
         ResizeMode="CanResizeWithGrip">
     
     <Window.Resources>
         <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#FFD700"/>
+            <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
             <Setter Property="Margin" Value="0,20,0,10"/>
         </Style>
         
         <Style x:Key="FeatureItemStyle" TargetType="Border">
-            <Setter Property="Background" Value="#252545"/>
+            <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}"/>
             <Setter Property="CornerRadius" Value="8"/>
             <Setter Property="Padding" Value="15,12"/>
             <Setter Property="Margin" Value="0,5"/>
@@ -25,12 +25,12 @@
         <Style x:Key="FeatureTitleStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
         </Style>
         
         <Style x:Key="FeatureDescStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Foreground" Value="#A0A0B0"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextSecondaryBrush}"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Margin" Value="0,5,0,0"/>
         </Style>
@@ -44,13 +44,13 @@
         </Grid.RowDefinitions>
         
         <!-- Header -->
-        <Border Grid.Row="0" Background="#252550" Padding="25,20">
+        <Border Grid.Row="0" Background="{DynamicResource HeaderBackgroundBrush}" Padding="25,20">
             <StackPanel>
                 <TextBlock Text="📖 HighlightMe User Guide" 
                            FontSize="24" FontWeight="Bold" 
-                           Foreground="#FFFFFF"/>
+                           Foreground="{DynamicResource TextPrimaryBrush}"/>
                 <TextBlock Text="Learn how to find files on your desktop instantly" 
-                           FontSize="13" Foreground="#8080A0" Margin="0,5,0,0"/>
+                           FontSize="13" Foreground="{DynamicResource TextSecondaryBrush}" Margin="0,5,0,0"/>
             </StackPanel>
         </Border>
         
@@ -162,24 +162,25 @@
         </ScrollViewer>
         
         <!-- Footer -->
-        <Border Grid.Row="2" Background="#252550" Padding="25,15">
+        <Border Grid.Row="2" Background="{DynamicResource TertiaryBackgroundBrush}" Padding="25,15">
             <Grid>
                 <TextBlock Text="Hover over any button to see its tooltip!" 
-                           Foreground="#8080A0" FontSize="12" VerticalAlignment="Center"/>
+                           Foreground="{DynamicResource TextSecondaryBrush}" FontSize="12" VerticalAlignment="Center"/>
                 <Button Content="Got it!" 
                         HorizontalAlignment="Right"
                         Padding="25,10"
                         FontSize="14"
+                        Foreground="White"
                         Cursor="Hand"
                         Click="CloseButton_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
-                            <Border x:Name="border" Background="#4A6FA5" CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            <Border x:Name="border" Background="{DynamicResource AccentBrush}" CornerRadius="8" Padding="{TemplateBinding Padding}">
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="border" Property="Background" Value="#5A7FB5"/>
+                                    <Setter TargetName="border" Property="Background" Value="{DynamicResource AccentLightBrush}"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
