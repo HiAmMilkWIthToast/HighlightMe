@@ -45,8 +45,8 @@ namespace HighlightMe.ViewModels
         private int _cardMargin = 8;
         private bool _showFileDetails = true;
 
-        // User info
-        public string UserName => Environment.UserName;
+        // User info - displays PC/computer name
+        public string UserName => Environment.MachineName;
 
         public MainViewModel()
         {

@@ -95,6 +95,14 @@
                 
                 <Border Style="{StaticResource FeatureItemStyle}">
                     <StackPanel>
+                        <TextBlock Style="{StaticResource FeatureTitleStyle}" Text="📥 Import Files"/>
+                        <TextBlock Style="{StaticResource FeatureDescStyle}" 
+                                   Text="Click the 'Import' button to browse files anywhere on your computer and copy or move them to your desktop. Use Quick Access buttons for Documents, Downloads, Pictures, Music, and Videos folders."/>
+                    </StackPanel>
+                </Border>
+                
+                <Border Style="{StaticResource FeatureItemStyle}">
+                    <StackPanel>
                         <TextBlock Style="{StaticResource FeatureTitleStyle}" Text="✏️ Rename Files &amp; Folders"/>
                         <TextBlock Style="{StaticResource FeatureDescStyle}" 
                                    Text="Right-click any item and select 'Rename' to give it a new name. A dialog will prompt you for the new name."/>
