@@ -114,6 +114,13 @@ namespace HighlightMe.Models
             set { _isLocked = value; OnPropertyChanged(); }
         }
 
+        private bool _isPrivacyBlurred;
+        public bool IsPrivacyBlurred
+        {
+            get => _isPrivacyBlurred;
+            set { _isPrivacyBlurred = value; OnPropertyChanged(); }
+        }
+
         public string FormattedSize
         {
             get

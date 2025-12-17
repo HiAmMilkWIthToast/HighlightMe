@@ -489,8 +489,44 @@
                     </ToggleButton.Template>
                 </ToggleButton>
                 
+                <!-- Privacy Mode Toggle -->
+                <ToggleButton Grid.Column="6"
+                              IsChecked="{Binding PrivacyModeEnabled}"
+                              VerticalAlignment="Center"
+                              Margin="0,0,15,0"
+                              Cursor="Hand"
+                              ToolTip="Privacy Mode - Blur file names and icons for screenshot privacy. Enable before sharing screens or taking screenshots.">
+                    <ToggleButton.Template>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Border x:Name="border" 
+                                    Background="{DynamicResource InputBackgroundBrush}" 
+                                    CornerRadius="10" 
+                                    Padding="15,10"
+                                    BorderThickness="2"
+                                    BorderBrush="{DynamicResource InputBorderBrush}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="icon" Text="🔓" FontSize="16" Margin="0,0,8,0"/>
+                                    <TextBlock x:Name="text" Text="Privacy" 
+                                               Foreground="{DynamicResource TextSecondaryBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#2D1B4E"/>
+                                    <Setter TargetName="border" Property="BorderBrush" Value="#9C27B0"/>
+                                    <Setter TargetName="text" Property="Foreground" Value="#CE93D8"/>
+                                    <Setter TargetName="icon" Property="Text" Value="🔒"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="{DynamicResource InputBorderBrush}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </ToggleButton.Template>
+                </ToggleButton>
+                
                 <!-- Category Manager Button -->
-                <Button Grid.Column="6"
+                <Button Grid.Column="7"
                         Command="{Binding OpenColorSettingsCommand}"
                         ToolTip="Customize highlight colors for different file types (Documents, Images, Videos, Audio, etc.). Make each category stand out with your preferred colors."
                         Cursor="Hand"
@@ -858,6 +894,10 @@
                                               Click="ToggleLockMenuItem_Click"
                                               Foreground="{DynamicResource TextPrimaryBrush}"
                                               ToolTip="Lock file to prevent deletion"/>
+                                    <MenuItem Header="🔐 Blur/Unblur" 
+                                              Click="TogglePrivacyBlurMenuItem_Click"
+                                              Foreground="#CE93D8"
+                                              ToolTip="Mark this item to be blurred when Privacy Mode is on"/>
                                     <Separator Background="{DynamicResource SeparatorBrush}"/>
                                     <MenuItem Header="✏️ Rename" 
                                               Click="RenameMenuItem_Click"
@@ -949,7 +989,30 @@
                                     <Ellipse Width="70" Height="70" Fill="#0A1628"/>
                                     <Image Source="{Binding Icon}" 
                                            Width="40" Height="40"
-                                           RenderOptions.BitmapScalingMode="HighQuality"/>
+                                           RenderOptions.BitmapScalingMode="HighQuality">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Style.Triggers>
+                                                    <!-- Global Privacy Mode - blurs ALL items -->
+                                                    <DataTrigger Binding="{Binding DataContext.PrivacyModeEnabled, RelativeSource={RelativeSource AncestorType=Window}}" Value="True">
+                                                        <Setter Property="Effect">
+                                                            <Setter.Value>
+                                                                <BlurEffect Radius="10"/>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                    <!-- Per-item blur - always blur marked items -->
+                                                    <DataTrigger Binding="{Binding IsPrivacyBlurred}" Value="True">
+                                                        <Setter Property="Effect">
+                                                            <Setter.Value>
+                                                                <BlurEffect Radius="10"/>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
                                     
                                     <!-- Highlight Indicator -->
                                     <Ellipse Width="76" Height="76"
@@ -971,6 +1034,18 @@
                                             Padding="6,2"
                                             ToolTip="{Binding NoteText}">
                                         <TextBlock Text="📝" FontSize="10"/>
+                                    </Border>
+                                    
+                                    <!-- Privacy Blur Badge -->
+                                    <Border Visibility="{Binding IsPrivacyBlurred, Converter={StaticResource BoolToVisibilityConverter}}"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Bottom"
+                                            Margin="-5,0,0,-5"
+                                            Background="#9C27B0"
+                                            CornerRadius="10"
+                                            Padding="6,2"
+                                            ToolTip="🔐 PRIVACY BLUR - Will be blurred when Privacy Mode is ON">
+                                        <TextBlock Text="🔐" FontSize="10"/>
                                     </Border>
                                     
                                     <!-- Hidden File Ghost Indicator with Glow -->
@@ -1066,7 +1141,30 @@
                                            TextTrimming="CharacterEllipsis"
                                            TextAlignment="Center"
                                            ToolTip="{Binding Name}"
-                                           MaxWidth="180"/>
+                                           MaxWidth="180">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <!-- Global Privacy Mode - blurs ALL items -->
+                                                <DataTrigger Binding="{Binding DataContext.PrivacyModeEnabled, RelativeSource={RelativeSource AncestorType=Window}}" Value="True">
+                                                    <Setter Property="Effect">
+                                                        <Setter.Value>
+                                                            <BlurEffect Radius="8"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <!-- Per-item blur - always blur marked items -->
+                                                <DataTrigger Binding="{Binding IsPrivacyBlurred}" Value="True">
+                                                    <Setter Property="Effect">
+                                                        <Setter.Value>
+                                                            <BlurEffect Radius="8"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
                                 
                                 <!-- Info -->
                                 <StackPanel Grid.Row="2" Margin="0,8,0,0" HorizontalAlignment="Center">

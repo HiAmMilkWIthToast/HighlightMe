@@ -7,6 +7,12 @@ namespace HighlightMe.Models
         public ThemeSettings Theme { get; set; } = new();
         public LayoutSettings Layout { get; set; } = new();
         public IconPackSettings IconPack { get; set; } = new();
+        public PrivacySettings Privacy { get; set; } = new();
+    }
+
+    public class PrivacySettings
+    {
+        public bool PrivacyModeEnabled { get; set; } = false;
     }
 
     public class ThemeSettings

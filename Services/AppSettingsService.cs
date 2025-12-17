@@ -96,5 +96,12 @@ namespace HighlightMe.Services
             SaveSettings();
             SettingsChanged?.Invoke();
         }
+
+        public void SetPrivacyMode(bool enabled)
+        {
+            _settings.Privacy.PrivacyModeEnabled = enabled;
+            SaveSettings();
+            SettingsChanged?.Invoke();
+        }
     }
 }

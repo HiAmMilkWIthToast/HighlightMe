@@ -156,6 +156,51 @@
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
+            
+            <!-- Privacy Tab -->
+            <TabItem Header="🔒 Privacy">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,15,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Privacy Mode" 
+                                   FontSize="16" 
+                                   FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextPrimaryBrush}"
+                                   Margin="0,0,0,10"/>
+                        
+                        <TextBlock Text="When enabled, file names and icons are blurred to protect your privacy when sharing screenshots or screen recordings." 
+                                   FontSize="13" 
+                                   Foreground="{DynamicResource TextSecondaryBrush}"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,20"/>
+                        
+                        <CheckBox x:Name="PrivacyModeCheckbox"
+                                  Content="Enable Privacy Mode (blur files and icons)"
+                                  IsChecked="False"
+                                  Foreground="{DynamicResource TextPrimaryBrush}"
+                                  FontSize="14"
+                                  Margin="0,5"
+                                  Checked="PrivacyModeCheckbox_Changed"
+                                  Unchecked="PrivacyModeCheckbox_Changed"/>
+                        
+                        <Border Background="{DynamicResource InputBackgroundBrush}" 
+                                CornerRadius="8" 
+                                Padding="15" 
+                                Margin="0,20,0,0">
+                            <StackPanel>
+                                <TextBlock Text="💡 Tip" 
+                                           FontSize="14" 
+                                           FontWeight="SemiBold"
+                                           Foreground="#CE93D8"
+                                           Margin="0,0,0,8"/>
+                                <TextBlock Text="You can also quickly toggle Privacy Mode from the main window using the 🔒 Privacy button in the header bar." 
+                                           FontSize="12" 
+                                           Foreground="{DynamicResource TextSecondaryBrush}"
+                                           TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
         </TabControl>
         
         <!-- Footer -->

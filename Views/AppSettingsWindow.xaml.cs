@@ -14,6 +14,7 @@ namespace HighlightMe.Views
         private string _selectedTheme;
         private CardSizeOption _selectedCardSize;
         private string _selectedIconPack;
+        private bool _privacyModeEnabled;
 
         public AppSettingsWindow(AppSettingsService settingsService, ThemeService themeService)
         {
@@ -24,10 +25,14 @@ namespace HighlightMe.Views
             _selectedTheme = _settingsService.Settings.Theme.CurrentTheme;
             _selectedCardSize = _settingsService.Settings.Layout.CardSize;
             _selectedIconPack = _settingsService.Settings.IconPack.CurrentPack;
+            _privacyModeEnabled = _settingsService.Settings.Privacy.PrivacyModeEnabled;
             
             BuildThemesUI();
             BuildLayoutUI();
             BuildIconPacksUI();
+            
+            // Initialize Privacy Mode checkbox
+            PrivacyModeCheckbox.IsChecked = _privacyModeEnabled;
         }
 
         private void BuildThemesUI()
@@ -216,6 +221,12 @@ namespace HighlightMe.Views
             _settingsService?.SetShowFileDetails(ShowDetailsCheckbox.IsChecked ?? true);
         }
 
+        private void PrivacyModeCheckbox_Changed(object sender, RoutedEventArgs e)
+        {
+            _privacyModeEnabled = PrivacyModeCheckbox.IsChecked ?? false;
+            _settingsService?.SetPrivacyMode(_privacyModeEnabled);
+        }
+
         private void BuildIconPacksUI()
         {
             IconPacksPanel.Children.Clear();
@@ -323,16 +334,19 @@ namespace HighlightMe.Views
                 _settingsService.SetCardSpacing(8);
                 _settingsService.SetShowFileDetails(true);
                 _settingsService.SetIconPack("Default");
+                _settingsService.SetPrivacyMode(false);
                 
                 _selectedTheme = "Dark";
                 _selectedCardSize = CardSizeOption.Medium;
                 _selectedIconPack = "Default";
+                _privacyModeEnabled = false;
                 
                 _themeService.ApplyTheme("Dark");
                 
                 BuildThemesUI();
                 BuildLayoutUI();
                 BuildIconPacksUI();
+                PrivacyModeCheckbox.IsChecked = false;
             }
         }
 

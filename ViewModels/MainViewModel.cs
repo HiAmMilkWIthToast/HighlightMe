@@ -21,6 +21,7 @@ namespace HighlightMe.ViewModels
         private readonly FileNotesService _notesService;
         private readonly FileLockService _fileLockService;
         private readonly AppSettingsService _appSettingsService;
+        private readonly PrivacyBlurService _privacyBlurService;
         private readonly DispatcherTimer _debounceTimer;
         private readonly DispatcherTimer _saveSearchTimer;
         private string _searchQuery = string.Empty;
@@ -44,6 +45,7 @@ namespace HighlightMe.ViewModels
         private int _cardWidth = 200;
         private int _cardMargin = 8;
         private bool _showFileDetails = true;
+        private bool _privacyModeEnabled = false;
 
         // User info - displays PC/computer name
         public string UserName => Environment.MachineName;
@@ -57,6 +59,7 @@ namespace HighlightMe.ViewModels
             _notesService = new FileNotesService();
             _fileLockService = new FileLockService();
             _appSettingsService = App.SettingsService ?? new AppSettingsService();
+            _privacyBlurService = new PrivacyBlurService();
             
             // Subscribe to settings changes for layout updates
             _appSettingsService.SettingsChanged += OnSettingsChanged;
@@ -113,6 +116,7 @@ namespace HighlightMe.ViewModels
             ToggleHiddenCommand = new RelayCommand(ToggleHidden);
             PreviewFileCommand = new RelayCommand(PreviewFile);
             ToggleLockCommand = new RelayCommand(ToggleLock);
+            TogglePrivacyBlurCommand = new RelayCommand(TogglePrivacyBlur);
             OpenAppSettingsCommand = new RelayCommand(_ => OpenAppSettings());
             OpenHelpCommand = new RelayCommand(_ => OpenHelp());
             
@@ -316,6 +320,7 @@ namespace HighlightMe.ViewModels
         public ICommand ToggleHiddenCommand { get; }
         public ICommand PreviewFileCommand { get; }
         public ICommand ToggleLockCommand { get; }
+        public ICommand TogglePrivacyBlurCommand { get; }
         public ICommand OpenAppSettingsCommand { get; }
         public ICommand OpenHelpCommand { get; }
         
@@ -335,6 +340,17 @@ namespace HighlightMe.ViewModels
         {
             get => _showFileDetails;
             set { _showFileDetails = value; OnPropertyChanged(); }
+        }
+        
+        public bool PrivacyModeEnabled
+        {
+            get => _privacyModeEnabled;
+            set 
+            { 
+                _privacyModeEnabled = value; 
+                OnPropertyChanged();
+                _appSettingsService.SetPrivacyMode(value);
+            }
         }
         
         public ObservableCollection<string> SearchHistory => _searchHistoryService.History;
@@ -372,6 +388,15 @@ namespace HighlightMe.ViewModels
                 {
                     item.IsLocked = !item.IsLocked;
                 }
+            }
+        }
+
+        private void TogglePrivacyBlur(object? parameter)
+        {
+            if (parameter is DesktopItem item)
+            {
+                _privacyBlurService.ToggleBlur(item.FullPath);
+                item.IsPrivacyBlurred = !item.IsPrivacyBlurred;
             }
         }
 
@@ -415,6 +440,8 @@ namespace HighlightMe.ViewModels
             CardWidth = _appSettingsService.Settings.Layout.GetCardWidth();
             CardMargin = _appSettingsService.Settings.Layout.CardSpacing;
             ShowFileDetails = _appSettingsService.Settings.Layout.ShowFileDetails;
+            _privacyModeEnabled = _appSettingsService.Settings.Privacy.PrivacyModeEnabled;
+            OnPropertyChanged(nameof(PrivacyModeEnabled));
         }
 
         private void OpenNoteEditor(object? parameter)
@@ -478,6 +505,9 @@ namespace HighlightMe.ViewModels
                         item.NoteText = note.Note;
                         item.NoteColor = note.NoteColor;
                     }
+                    
+                    // Set privacy blur status
+                    item.IsPrivacyBlurred = _privacyBlurService.IsBlurred(item.FullPath);
                     
                     DesktopItems.Add(item);
                 }
