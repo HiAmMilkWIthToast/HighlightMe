@@ -5,8 +5,8 @@
         xmlns:converters="clr-namespace:HighlightMe.Converters"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         Title="HighlightMe - Desktop Scanner"
-        Height="978" Width="2160"
-        MinHeight="978" MinWidth="2160"
+        Height="800" Width="1200"
+        MinHeight="600" MinWidth="800"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource PrimaryBackgroundBrush}">
     
