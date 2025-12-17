@@ -7,9 +7,22 @@ namespace HighlightMe
 {
     public partial class MainWindow : Window
     {
+        private bool _resizeHintDismissed = false;
+        
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            // Dismiss the hint when window is made larger than initial size
+            // Check if width > 1050 OR height > 750 (slightly larger than default 1200x800 would trigger)
+            if (!_resizeHintDismissed && (e.NewSize.Width > 1250 || e.NewSize.Height > 850))
+            {
+                _resizeHintDismissed = true;
+                ResizeHintOverlay.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void CopyPathMenuItem_Click(object sender, RoutedEventArgs e)
