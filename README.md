@@ -6,6 +6,10 @@ A WPF desktop app for quickly finding and highlighting files on your Windows des
 ![WPF](https://img.shields.io/badge/WPF-Desktop-0078D4?style=flat&logo=windows)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+## Author
+
+Created by **HiAmMilkWIthToast** - Original creator of this program.
+
 ## What it does
 
 Search for files on your desktop and get visual feedback showing you exactly where they are. The app highlights matching files with a glow effect and bouncing arrows so you can spot them instantly.
