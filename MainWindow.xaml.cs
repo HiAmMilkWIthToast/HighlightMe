@@ -2,6 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using HighlightMe.Models;
 using HighlightMe.ViewModels;
+using HighlightMe.Views;
 
 namespace HighlightMe
 {
@@ -129,6 +130,21 @@ namespace HighlightMe
             {
                 button.ContextMenu.PlacementTarget = button;
                 button.ContextMenu.IsOpen = true;
+            }
+        }
+
+        private void ImportButton_Click(object sender, RoutedEventArgs e)
+        {
+            var fileBrowserWindow = new FileBrowserWindow
+            {
+                Owner = this
+            };
+            fileBrowserWindow.ShowDialog();
+            
+            // Refresh the view after importing files
+            if (DataContext is MainViewModel viewModel)
+            {
+                viewModel.RefreshCommand.Execute(null);
             }
         }
 

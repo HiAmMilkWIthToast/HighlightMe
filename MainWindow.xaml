@@ -65,6 +65,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/> <!-- Import -->
                     <ColumnDefinition Width="Auto"/> <!-- New -->
                     <ColumnDefinition Width="Auto"/> <!-- Settings -->
                     <ColumnDefinition Width="Auto"/> <!-- Help -->
@@ -564,8 +565,38 @@
                         VerticalAlignment="Center"
                         Margin="0,0,10,0"/>
                 
-                <!-- New Button with Dropdown -->
+                <!-- Import Button -->
                 <Button Grid.Column="9"
+                        Click="ImportButton_Click"
+                        ToolTip="Browse and import files or folders from elsewhere on your computer to your desktop"
+                        Cursor="Hand"
+                        VerticalAlignment="Center"
+                        Margin="0,0,10,0">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border" 
+                                    Background="{DynamicResource InputBackgroundBrush}" 
+                                    CornerRadius="10" 
+                                    Padding="15,10"
+                                    BorderThickness="2"
+                                    BorderBrush="{DynamicResource InputBorderBrush}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="📥" FontSize="16" Margin="0,0,8,0"/>
+                                    <TextBlock Text="Import" 
+                                               Foreground="{DynamicResource TextSecondaryBrush}" FontSize="13" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="{DynamicResource InputBorderBrush}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                
+                <!-- New Button with Dropdown -->
+                <Button Grid.Column="10"
                         Click="NewButton_Click"
                         ToolTip="Create a new file or folder on your desktop"
                         Cursor="Hand"
@@ -602,7 +633,7 @@
                 </Button>
                 
                 <!-- Settings Button -->
-                <Button Grid.Column="10"
+                <Button Grid.Column="11"
                         Command="{Binding OpenAppSettingsCommand}"
                         ToolTip="Open settings to customize themes (Dark/Light/Midnight), card sizes, icon sizes, and other appearance options."
                         Cursor="Hand"
@@ -631,7 +662,7 @@
                 </Button>
                 
                 <!-- Help Button -->
-                <Button Grid.Column="11"
+                <Button Grid.Column="12"
                         Command="{Binding OpenHelpCommand}"
                         ToolTip="Open the user guide to learn how to use all features of HighlightMe."
                         Cursor="Hand"
@@ -661,7 +692,7 @@
                 </Button>
                 
                 <!-- GitHub Button -->
-                <Button Grid.Column="12"
+                <Button Grid.Column="13"
                         Click="OpenGitHub_Click"
                         ToolTip="View the source code on GitHub and give it a ⭐!"
                         Cursor="Hand"
