@@ -86,4 +86,4 @@ Make sure `bin/`, `obj/`, and `.vs/` are in your `.gitignore` (they should be al
 
 ---
 
-Questions or issues? Open an issue on GitHub.
+Questions or issues? Open an issue on GitHub. .
